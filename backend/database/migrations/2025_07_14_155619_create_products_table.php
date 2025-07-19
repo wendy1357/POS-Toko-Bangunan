@@ -13,12 +13,12 @@ return new class extends Migration
 {
     Schema::create('products', function (Blueprint $table) {
         $table->id();
-        $table->string('name');
-        $table->string('sku')->unique()->nullable(); // SKU bisa unik atau dikosongi
-        $table->decimal('purchase_price', 15, 2); // Harga Beli
-        $table->decimal('selling_price', 15, 2);  // Harga Jual
-        $table->string('unit'); // Satuan: sak, batang, buah, dll
-        $table->integer('stock')->default(0);
+        $table->string('nama_produk');
+        $table->string('sku')->nullable();
+        $table->decimal('stock_in_base_unit', 10, 2);
+        $table->string('base_unit');
+        $table->decimal('harga_beli_per_base_unit', 15, 2);
+        $table->foreignId('category_id')->constrained('categories'); // Ini cara membuat Foreign Key
         $table->timestamps();
     });
 }
