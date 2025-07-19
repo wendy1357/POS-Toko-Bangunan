@@ -1,0 +1,64 @@
+entitas: users
+isinya
+id (primary key)
+email (varchar) -- Unik dan tidak boleh kosong.
+password (varchar) -- Tidak boleh kosong.
+role (varchar) -- Tidak boleh kosong (contoh: 'owner', 'admin')
+
+
+entitas: categories
+isinya
+id (primary key)
+name (varchar) -- Tidak boleh kosong.
+
+
+entitas: products
+isinya
+id (primary key)
+nama_produk (varchar) -- Tidak boleh kosong.
+sku (varchar) -- Boleh kosong.
+stock_in_base_unit (decimal) -- Stok dalam satuan dasar, tidak boleh kosong.
+base_unit (varchar) -- Satuan dasar stok (contoh: 'Kg', 'Pcs'), tidak boleh kosong.
+harga_beli_per_base_unit (decimal) -- Tidak boleh kosong.
+category_id (Foreign Key) -- Terhubung ke categories.id, tidak boleh kosong.
+
+
+entitas: product_units
+isinya
+id (primary key)
+product_id (Foreign Key) -- Terhubung ke products.id, tidak boleh kosong.
+unit_name (varchar) -- Nama satuan jual (contoh: 'Zak', 'Ember'), tidak boleh kosong.
+conversion_rate (integer) -- Nilai konversi dari satuan dasar, tidak boleh kosong.
+harga_jual (decimal) -- Harga jual untuk satuan ini, tidak boleh kosong.
+
+
+entitas: customers (pelanggan)
+isinya
+id (primary key)
+nama (varchar) -- Tidak boleh kosong.
+no_hp (varchar) -- Boleh kosong.
+alamat (text) -- Boleh kosong.
+
+
+entitas: sales
+isinya
+id (primary key)
+transaction_code (varchar) -- Unik dan tidak boleh kosong.
+customer_id (Foreign Key) -- Terhubung ke customers.id, boleh kosong.
+user_id (Foreign Key) -- Terhubung ke users.id, tidak boleh kosong.
+total_amount (decimal) -- Tidak boleh kosong.
+amount_paid (decimal) -- Tidak boleh kosong.
+change_due (decimal) -- Tidak boleh kosong.
+payment_method (varchar) -- Tidak boleh kosong.
+payment_status (varchar) -- Tidak boleh kosong (contoh: 'Lunas', 'Belum Lunas').
+notes (text) -- Boleh kosong.
+transaction_date (timestamp) -- Tidak boleh kosong.
+
+entitas: sale_details
+isinya
+id (primary key)
+sale_id (Foreign Key) -- Terhubung ke sales.id, tidak boleh kosong.
+product_unit_id (Foreign Key) -- Terhubung ke product_units.id, tidak boleh kosong.
+quantity (decimal) -- Tidak boleh kosong.
+price_per_unit (decimal) -- Tidak boleh kosong.
+subtotal (decimal) -- Tidak boleh kosong.
