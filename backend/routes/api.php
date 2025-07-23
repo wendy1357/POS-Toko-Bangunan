@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\SaleController;
 use App\Http\Controllers\Api\AuthController; // <-- Import AuthController
 use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\CategoryController;
 
 // Rute Publik (tidak perlu login)
 Route::post('/register', [AuthController::class, 'register']);
@@ -17,13 +18,9 @@ Route::get('/products/{product}', [ProductController::class, 'show']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/sales', [SaleController::class, 'store']);
+    
     // Rute CRUD produk yang butuh login kita pindahkan ke sini
-    Route::post('/products', [ProductController::class, 'store']);
-    Route::put('/products/{product}', [ProductController::class, 'update']);
-    Route::delete('/products/{product}', [ProductController::class, 'destroy']);
-});
-
-Route::middleware('auth:sanctum')->group(function () {
-    // ... rute lain
+    Route::apiResource('products', ProductController::class)->except(['index', 'show']);
     Route::apiResource('customers', CustomerController::class);
+    Route::apiResource('categories', CategoryController::class);
 });
