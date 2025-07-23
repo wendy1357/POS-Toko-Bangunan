@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\SaleController;
 use App\Http\Controllers\Api\AuthController; // <-- Import AuthController
+use App\Http\Controllers\Api\CustomerController;
 
 // Rute Publik (tidak perlu login)
 Route::post('/register', [AuthController::class, 'register']);
@@ -20,4 +21,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/products', [ProductController::class, 'store']);
     Route::put('/products/{product}', [ProductController::class, 'update']);
     Route::delete('/products/{product}', [ProductController::class, 'destroy']);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    // ... rute lain
+    Route::apiResource('customers', CustomerController::class);
 });
