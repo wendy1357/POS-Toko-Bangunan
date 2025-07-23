@@ -14,6 +14,20 @@ class Sale extends Model
     /**
      * Satu Sale dimiliki oleh satu User.
      */
+protected $fillable = [
+    'transaction_code', // <-- TAMBAHKAN INI
+    'customer_id',
+    'user_id',
+    'total_amount',
+    'amount_paid',
+    'change_due',
+    'payment_method',
+    'payment_status',
+    'transaction_date',
+];
+
+
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

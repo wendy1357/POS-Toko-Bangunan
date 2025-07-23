@@ -13,6 +13,14 @@ class SaleDetail extends Model
     /**
      * Satu SaleDetail dimiliki oleh satu Sale.
      */
+protected $fillable = [
+        'sale_id',
+        'product_unit_id',
+        'quantity',
+        'price_per_unit',
+        'subtotal'
+    ];
+
     public function sale(): BelongsTo
     {
         return $this->belongsTo(Sale::class);

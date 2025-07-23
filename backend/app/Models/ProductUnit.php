@@ -14,6 +14,14 @@ class ProductUnit extends Model
     /**
      * Satu ProductUnit dimiliki oleh satu Product.
      */
+
+    protected $fillable = [
+        'product_id',
+        'unit_name',
+        'conversion_rate',
+        'harga_jual',
+    ];
+
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);

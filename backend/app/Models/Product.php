@@ -10,6 +10,20 @@ class Product extends Model
 {
         use HasFactory;
 
+            /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'nama_produk',
+        'sku',
+        'stock_in_base_unit',
+        'base_unit',
+        'harga_beli_per_base_unit',
+        'category_id',
+    ];
+
     // Relasi ke Category (Satu Produk hanya punya satu Kategori)
     public function category(): BelongsTo
     {

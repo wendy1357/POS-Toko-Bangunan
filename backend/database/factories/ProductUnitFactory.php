@@ -1,7 +1,8 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\Product; // <-- Import Product
+use App\Models\ProductUnit; // <-- Import ProductUnit
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

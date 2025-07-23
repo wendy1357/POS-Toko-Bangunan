@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\Product;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +14,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
+        // Membuat 1 User utama
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admin Owner',
+            'email' => 'wendywicaksana@gmail.com',
         ]);
+
+        // Membuat 10 Kategori
+        Category::factory(10)->create();
+
+        // Membuat 50 Produk
+        Product::factory(50)->create();
+
+        // Anda bisa tambahkan factory lain di sini nanti...
+        // \App\Models\Customer::factory(20)->create();
     }
 }

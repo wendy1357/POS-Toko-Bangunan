@@ -13,6 +13,12 @@ class Customer extends Model
     /**
      * Satu Customer bisa memiliki banyak Sales.
      */
+    protected $fillable=[
+    'nama',
+    'no_hp',
+    'alamat'
+    ];
+
     public function sales(): HasMany
     {
         return $this->hasMany(Sale::class);

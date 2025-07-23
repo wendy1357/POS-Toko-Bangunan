@@ -13,6 +13,9 @@ class Category extends Model
     /**
      * Satu Category memiliki banyak Products.
      */
+    protected $fillable = [
+        'name'
+    ];
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
