@@ -4,6 +4,7 @@ import Login from "../views/Login.vue";
 import Dashboard from "../views/Dashboard.vue";
 import AppLayout from "../layouts/AppLayout.vue";
 import ProductList from "../views/ProductList.vue";
+import CustomerList from "../views/CustomerList.vue";
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
         path: "products",
         name: "ProductList",
         component: ProductList,
+      },
+      {
+        path: "customers",
+        name: "CustomerList",
+        component: CustomerList,
       },
     ],
   },

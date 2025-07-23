@@ -19,6 +19,7 @@ const handleLogout = async () => {
         <nav>
           <router-link to="/admin/dashboard" class="block py-2">Dashboard</router-link>
           <router-link to="/admin/products" class="block py-2">Produk</router-link>
+          <router-link to="/admin/customers" class="block py-2">Pelanggan</router-link>
         </nav>
       </div>
       <div class="mt-auto">
