@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import axios from "axios";
+import api from "../api/axios";
 
 // Variabel untuk menampung data produk
 const products = ref([]);
@@ -10,7 +10,7 @@ const isLoading = ref(true);
 // Fungsi untuk mengambil data dari API
 const fetchProducts = async () => {
   try {
-    const response = await axios.get("http://127.0.0.1:8000/api/products");
+    const response = await api.get("/products");
     products.value = response.data;
   } catch (error) {
     console.error("Gagal mengambil data produk:", error);
