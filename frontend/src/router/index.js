@@ -5,7 +5,7 @@ import Dashboard from "../views/Dashboard.vue";
 import AppLayout from "../layouts/AppLayout.vue";
 import ProductList from "../views/ProductList.vue";
 import CustomerList from "../views/CustomerList.vue";
-
+import CategoryList from "../views/CategoryList.vue";
 const routes = [
   {
     path: "/",
@@ -31,6 +31,11 @@ const routes = [
         path: "customers",
         name: "CustomerList",
         component: CustomerList,
+      },
+      {
+        path: "categories",
+        name: "CategoryList",
+        component: CategoryList,
       },
     ],
   },

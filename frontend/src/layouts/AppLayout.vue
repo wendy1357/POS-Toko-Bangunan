@@ -17,9 +17,12 @@ const handleLogout = async () => {
       <div>
         <h2 class="text-xl font-bold mb-4">Toko Bangunan</h2>
         <nav>
-          <router-link to="/admin/dashboard" class="block py-2">Dashboard</router-link>
-          <router-link to="/admin/products" class="block py-2">Produk</router-link>
-          <router-link to="/admin/customers" class="block py-2">Pelanggan</router-link>
+          <nav class="flex flex-col space-y-2">
+            <router-link to="/admin/dashboard" class="px-4 py-2 rounded hover:bg-gray-700">Dashboard</router-link>
+            <router-link to="/admin/products" class="px-4 py-2 rounded hover:bg-gray-700">Produk</router-link>
+            <router-link to="/admin/customers" class="px-4 py-2 rounded hover:bg-gray-700">Pelanggan</router-link>
+            <router-link to="/admin/categories" class="px-4 py-2 rounded hover:bg-gray-700">Kategori</router-link>
+          </nav>
         </nav>
       </div>
       <div class="mt-auto">
