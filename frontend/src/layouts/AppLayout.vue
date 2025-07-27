@@ -18,6 +18,7 @@ const handleLogout = async () => {
         <h2 class="text-xl font-bold mb-4">Toko Bangunan</h2>
         <nav>
           <nav class="flex flex-col space-y-2">
+            <router-link to="/admin/pos" class="px-4 py-2 rounded hover:bg-gray-700">Kasir</router-link>
             <router-link to="/admin/dashboard" class="px-4 py-2 rounded hover:bg-gray-700">Dashboard</router-link>
             <router-link to="/admin/products" class="px-4 py-2 rounded hover:bg-gray-700">Produk</router-link>
             <router-link to="/admin/customers" class="px-4 py-2 rounded hover:bg-gray-700">Pelanggan</router-link>

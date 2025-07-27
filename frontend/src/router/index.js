@@ -6,6 +6,7 @@ import AppLayout from "../layouts/AppLayout.vue";
 import ProductList from "../views/ProductList.vue";
 import CustomerList from "../views/CustomerList.vue";
 import CategoryList from "../views/CategoryList.vue";
+import POS from "../views/POS.vue";
 const routes = [
   {
     path: "/",
@@ -36,6 +37,11 @@ const routes = [
         path: "categories",
         name: "CategoryList",
         component: CategoryList,
+      },
+      {
+        path: "pos",
+        name: "POS",
+        component: POS,
       },
     ],
   },
