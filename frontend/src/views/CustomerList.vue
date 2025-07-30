@@ -2,11 +2,13 @@
 import { ref, onMounted } from "vue";
 import api from "../api/axios";
 import CustomerFormModal from "../components/CustomerFormModal.vue";
+import { useToast } from "vue-toastification";
 
 const customers = ref([]);
 const isLoading = ref(true);
 const isModalVisible = ref(false);
 const currentCustomer = ref(null);
+const toast = useToast();
 
 const fetchCustomers = async () => {
   isLoading.value = true;
@@ -38,16 +40,17 @@ const closeModal = () => {
 const handleSave = async (customerData) => {
   try {
     if (customerData.id) {
-      // Mode Update
       await api.put(`/customers/${customerData.id}`, customerData);
+      toast.success("Pelanggan berhasil diperbarui!"); // <-- Ganti alert
     } else {
-      // Mode Tambah
       await api.post("/customers", customerData);
+      toast.success("Pelanggan berhasil ditambahkan!"); // <-- Ganti alert
     }
     closeModal();
-    fetchCustomers(); // Muat ulang data
+    fetchCustomers();
   } catch (error) {
     console.error("Gagal menyimpan pelanggan:", error);
+    toast.error("Gagal menyimpan pelanggan."); // <-- Ganti alert
   }
 };
 
@@ -55,9 +58,11 @@ const deleteCustomer = async (id) => {
   if (window.confirm("Apakah Anda yakin ingin menghapus pelanggan ini?")) {
     try {
       await api.delete(`/customers/${id}`);
+      toast.success("Pelanggan berhasil dihapus."); // <-- Ganti alert
       fetchCustomers();
     } catch (error) {
       console.error("Gagal menghapus pelanggan:", error);
+      toast.error("Gagal menghapus pelanggan."); // <-- Ganti alert
     }
   }
 };
