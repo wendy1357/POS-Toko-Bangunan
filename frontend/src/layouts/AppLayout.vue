@@ -12,27 +12,30 @@ const handleLogout = async () => {
 </script>
 
 <template>
-  <div class="flex">
-    <div class="w-64 h-screen bg-gray-800 text-white p-4 flex flex-col">
-      <div>
-        <h2 class="text-xl font-bold mb-4">Toko Bangunan</h2>
-        <nav>
-          <nav class="flex flex-col space-y-2">
-            <router-link to="/admin/pos" class="px-4 py-2 rounded hover:bg-gray-700">Kasir</router-link>
-            <router-link to="/admin/dashboard" class="px-4 py-2 rounded hover:bg-gray-700">Dashboard</router-link>
-            <router-link to="/admin/products" class="px-4 py-2 rounded hover:bg-gray-700">Produk</router-link>
-            <router-link to="/admin/customers" class="px-4 py-2 rounded hover:bg-gray-700">Pelanggan</router-link>
-            <router-link to="/admin/categories" class="px-4 py-2 rounded hover:bg-gray-700">Kategori</router-link>
-          </nav>
-        </nav>
-      </div>
-      <div class="mt-auto">
-        <button @click="handleLogout" class="w-full text-left py-2">Logout</button>
+  <div class="flex h-screen bg-gray-100">
+    <div class="w-64 bg-gray-800 text-white flex-shrink-0">
+      <div class="p-4 text-xl font-bold">Toko Bangunan</div>
+      <ul class="menu p-2">
+        <li><router-link to="/admin/pos">Kasir</router-link></li>
+        <li><router-link to="/admin/dashboard">Dashboard</router-link></li>
+        <li class="menu-title"><span>Master Data</span></li>
+        <li><router-link to="/admin/products">Produk</router-link></li>
+        <li><router-link to="/admin/customers">Pelanggan</router-link></li>
+        <li><router-link to="/admin/categories">Kategori</router-link></li>
+      </ul>
+      <div class="p-2 mt-auto">
+        <button @click="handleLogout" class="btn btn-ghost w-full justify-start">Logout</button>
       </div>
     </div>
 
-    <div class="flex-1 p-8">
-      <router-view />
+    <div class="flex-1 flex flex-col overflow-hidden">
+      <header class="bg-white shadow p-4">
+        <div class="font-bold">Selamat Datang!</div>
+      </header>
+
+      <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-8">
+        <router-view />
+      </main>
     </div>
   </div>
 </template>

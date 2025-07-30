@@ -8,13 +8,13 @@ const isLoading = ref(true);
 const isModalVisible = ref(false);
 const currentCategory = ref(null);
 
-const fetchCategory = async () => {
-  // <-- Perbaiki nama fungsi
+const fetchCategories = async () => {
+  isLoading.value = true;
   try {
-    const response = await api.get("/categories"); // GANTI ENDPOINT
+    const response = await api.get("/categories");
     categories.value = response.data;
   } catch (error) {
-    console.error("Gagal mengambil data Category:", error);
+    console.error("Gagal mengambil data kategori:", error);
   } finally {
     isLoading.value = false;
   }
@@ -32,67 +32,65 @@ const showEditModal = (category) => {
 
 const closeModal = () => {
   isModalVisible.value = false;
-  currentCategory.value = null; // PERBAIKI TYPO
+  currentCategory.value = null;
 };
 
 const handleSave = async (categoryData) => {
   try {
     if (categoryData.id) {
-      // Mode Update
-      await api.put(`/categories/${categoryData.id}`, categoryData); // GANTI ENDPOINT
+      await api.put(`/categories/${categoryData.id}`, categoryData);
     } else {
-      // Mode Tambah
-      await api.post("/categories", categoryData); // GANTI ENDPOINT
+      await api.post("/categories", categoryData);
     }
     closeModal();
-    fetchCategory();
+    fetchCategories();
   } catch (error) {
-    console.error("Gagal menyimpan category:", error);
+    console.error("Gagal menyimpan kategori:", error);
   }
 };
 
 const deleteCategory = async (id) => {
-  console.log("ID yang akan dihapus:", id); // <-- Tambahkan ini untuk debugging
-  if (window.confirm("Apakah Anda yakin ingin menghapus category ini?")) {
+  if (window.confirm("Apakah Anda yakin ingin menghapus kategori ini?")) {
     try {
-      await api.delete(`/categories/${id}`); // GANTI ENDPOINT
-      fetchCategory();
+      await api.delete(`/categories/${id}`);
+      fetchCategories();
     } catch (error) {
-      console.error("Gagal menghapus category:", error);
+      console.error("Gagal menghapus kategori:", error);
     }
   }
 };
 
-onMounted(fetchCategory);
+onMounted(fetchCategories);
 </script>
 
 <template>
   <div>
     <div class="flex justify-between items-center mb-6">
-      <h1 class="text-3xl font-bold">Manajemen Category</h1>
-      <button @click="showAddModal" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Tambah Category</button>
+      <h1 class="text-3xl font-bold">Manajemen Kategori</h1>
+      <button @click="showAddModal" class="btn btn-primary">Tambah Kategori</button>
     </div>
 
-    <div v-if="isLoading">Memuat data...</div>
-    <div v-else class="bg-white shadow-md rounded">
-      <table class="min-w-full leading-normal">
+    <div v-if="isLoading" class="text-center">Memuat data...</div>
+    <div v-else class="overflow-x-auto bg-white rounded-lg shadow">
+      <table class="table w-full">
         <thead>
           <tr>
-            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Nama</th>
-            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Aksi</th>
+            <th>Nama Kategori</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="category in categories" :key="category.id">
-            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ category.name }}</td>
-            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-              <button @click="showEditModal(category)" class="text-indigo-600 hover:text-indigo-900 mr-4">Edit</button>
-              <button @click="deleteCategory(category.id)" class="text-red-600 hover:text-red-900">Hapus</button>
+          <tr v-for="category in categories" :key="category.id" class="hover">
+            <td>{{ category.name }}</td>
+            <td class="space-x-2">
+              <button @click="showEditModal(category)" class="btn btn-sm btn-outline btn-info">Edit</button>
+              <button @delete="deleteCategory(category.id)" class="btn btn-sm btn-outline btn-error">Hapus</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+
     <CategoryFormModal :show="isModalVisible" :category="currentCategory" @close="closeModal" @save="handleSave" />
   </div>
 </template>
