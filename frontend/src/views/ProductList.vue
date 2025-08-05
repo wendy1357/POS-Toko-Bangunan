@@ -2,7 +2,9 @@
 import { ref, onMounted } from "vue";
 import api from "../api/axios";
 import ProductFormModal from "../components/ProductFormModal.vue";
+import { useToast } from "vue-toastification";
 
+const toast = useToast();
 const products = ref([]);
 const isLoading = ref(true);
 const isModalVisible = ref(false);
@@ -39,13 +41,16 @@ const handleSave = async (productData) => {
   try {
     if (productData.id) {
       await api.put(`/products/${productData.id}`, productData);
+      toast.success("Produk berhasil diperbarui!"); // <-- Ganti alert
     } else {
       await api.post("/products", productData);
+      toast.success("Produk berhasil ditambahkan!"); // <-- Ganti alert
     }
     closeModal();
     fetchProducts();
   } catch (error) {
     console.error("Gagal menyimpan produk:", error);
+    toast.error("Gagal menyimpan produk.");
   }
 };
 
@@ -53,9 +58,11 @@ const deleteProduct = async (id) => {
   if (window.confirm("Apakah Anda yakin ingin menghapus produk ini?")) {
     try {
       await api.delete(`/products/${id}`);
+      toast.success("Produk berhasil dihapus."); // <-- Ganti alert
       fetchProducts();
     } catch (error) {
       console.error("Gagal menghapus produk:", error);
+      toast.error("Gagal menghapus produk.");
     }
   }
 };

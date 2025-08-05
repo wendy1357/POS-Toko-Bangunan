@@ -4,11 +4,12 @@ import api from "../api/axios";
 import CustomerFormModal from "../components/CustomerFormModal.vue";
 import { useToast } from "vue-toastification";
 
+const toast = useToast();
 const customers = ref([]);
 const isLoading = ref(true);
 const isModalVisible = ref(false);
 const currentCustomer = ref(null);
-const toast = useToast();
+
 
 const fetchCustomers = async () => {
   isLoading.value = true;

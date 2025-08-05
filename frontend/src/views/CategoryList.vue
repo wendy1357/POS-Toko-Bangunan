@@ -2,7 +2,9 @@
 import { ref, onMounted } from "vue";
 import api from "../api/axios";
 import CategoryFormModal from "../components/CategoryFormModal.vue";
+import { useToast } from "vue-toastification";
 
+const toast = useToast();
 const categories = ref([]);
 const isLoading = ref(true);
 const isModalVisible = ref(false);
@@ -39,13 +41,16 @@ const handleSave = async (categoryData) => {
   try {
     if (categoryData.id) {
       await api.put(`/categories/${categoryData.id}`, categoryData);
+      toast.success("Category berhasil diperbarui!");
     } else {
       await api.post("/categories", categoryData);
+      toast.success("Category berhasil ditambah!");
     }
     closeModal();
     fetchCategories();
   } catch (error) {
     console.error("Gagal menyimpan kategori:", error);
+    toast.error("Gagal menyimpan kategori");
   }
 };
 
@@ -53,9 +58,11 @@ const deleteCategory = async (id) => {
   if (window.confirm("Apakah Anda yakin ingin menghapus kategori ini?")) {
     try {
       await api.delete(`/categories/${id}`);
+      toast.success("Category berhasil dihapus.");
       fetchCategories();
     } catch (error) {
       console.error("Gagal menghapus kategori:", error);
+      toast.error("Gagal mengahapus category");
     }
   }
 };

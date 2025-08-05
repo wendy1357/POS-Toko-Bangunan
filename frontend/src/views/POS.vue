@@ -1,7 +1,9 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
 import api from "../api/axios";
+import { useToast } from "vue-toastification";
 
+const toast = useToast();
 const products = ref([]);
 const isLoading = ref(true);
 const cart = ref([]);
@@ -69,7 +71,7 @@ const submitSale = async () => {
 
   try {
     await api.post("/sales", saleData);
-    alert("Transaksi berhasil disimpan!");
+    toast.success("Transaksi berhasil disimpan!");
     cart.value = []; // Kosongkan keranjang
   } catch (error) {
     console.error("Gagal menyimpan transaksi:", error.response.data);
