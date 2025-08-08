@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\SaleController;
 use App\Http\Controllers\Api\AuthController; // <-- Import AuthController
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\DashboardController;
 
 // Rute Publik (tidak perlu login)
 Route::post('/register', [AuthController::class, 'register']);
@@ -23,4 +24,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('products', ProductController::class)->except(['index', 'show']);
     Route::apiResource('customers', CustomerController::class);
     Route::apiResource('categories', CategoryController::class);
+     Route::get('/dashboard', [DashboardController::class, 'summary']);
 });
